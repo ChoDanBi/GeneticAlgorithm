@@ -1,6 +1,6 @@
 #include "Object.h"
 
-void Object::SetCand(int _Cand, int _Len)
+void Object::SetInit(int _Cand)
 {
 	//후보해
 	this->Cand = _Cand;
@@ -8,8 +8,8 @@ void Object::SetCand(int _Cand, int _Len)
 	//적합도
 	this->Res = 80 + (38 * _Cand) - (_Cand * _Cand);
 
-	//갈이
-	this->Len = _Len;
+	//이진법 표기 길이
+	int Len = Manager::GetInstance()->GetLen();
 
 	//이진법
 	for (int i = 0; i < Len; ++i) {
@@ -21,7 +21,7 @@ void Object::SetCand(int _Cand, int _Len)
 	this->show();
 }
 
-void Object::SetBinary(vector<int> _Binary, int _Len)
+void Object::SetInit(vector<int> _Binary)
 {
 	//후보해
 	int size = _Binary.size();
@@ -40,19 +40,11 @@ void Object::SetBinary(vector<int> _Binary, int _Len)
 		j++;
 	}
 
-	/*
-	111이라 할때
-	0 0 1 1 1
-	0 0 4 2 1 = 7
-
-	실제 벡터는 1 1 1 0 0
-	*/
-
 	//적합도
 	this->Res = 80 + (38 * this->Cand) - (int)pow(this->Cand, 2);
 
-	//길이
-	this->Len = _Len;
+	//이진법 표기 길이
+	int Len = Manager::GetInstance()->GetLen();
 
 	//이진법
 	for (int i = 0; i < Len; ++i)
