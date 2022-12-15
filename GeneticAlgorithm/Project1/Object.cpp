@@ -9,7 +9,7 @@ void Object::SetInit(int _Cand)
 	this->Res = 80 + (38 * _Cand) - (_Cand * _Cand);
 
 	//이진법 표기 길이
-	int Len = Manager::GetInstance()->GetLen();
+	Len = Manager::GetInstance()->GetLen();
 
 	//이진법
 	for (int i = 0; i < Len; ++i) {
@@ -44,7 +44,7 @@ void Object::SetInit(vector<int> _Binary)
 	this->Res = 80 + (38 * this->Cand) - (int)pow(this->Cand, 2);
 
 	//이진법 표기 길이
-	int Len = Manager::GetInstance()->GetLen();
+	Len = Manager::GetInstance()->GetLen();
 
 	//이진법
 	for (int i = 0; i < Len; ++i)

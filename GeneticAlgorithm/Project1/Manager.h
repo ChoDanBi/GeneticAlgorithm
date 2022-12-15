@@ -26,17 +26,22 @@ private:
 
 public:
 	//초기화
+	void Init();
 	void Init(int _len, int _cnt, int _min, int _max);
 
+public:
 
 	//길이
 	void SetLen(int _len) { Len = _len; }
 	int GetLen() { return Len; }
 
-
 	//뽑을 횟수
 	void SetCnt(int _cnt) { Cnt = _cnt; }
 	int GetCnt() { return Cnt; }
+
+	//랜덤숫자 가져오기
+	int GetRandom();					//이미 설정한 값으로 숫자
+	int GetRandom(int _min, int _max);	//min~max 중
 
 
 	//오브젝트 리스트
