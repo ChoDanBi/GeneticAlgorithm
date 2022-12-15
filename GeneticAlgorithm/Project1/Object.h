@@ -1,6 +1,5 @@
 #pragma once
 #include "header.h"
-#include "Manager.h"
 
 class Object
 {
@@ -17,7 +16,7 @@ private:
 
 public:
 	//세팅 - 후보해로 만들어도 되고 이진수로 만들어도 됨
-	void SetInit(int _Cand);				//숫자로 초기화
+	void SetInit(int _Cand);	//숫자로 초기화
 	void SetInit(vector<int> _Binary);	//이진수로 초기화
 
 	//가져오기

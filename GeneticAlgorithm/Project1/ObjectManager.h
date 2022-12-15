@@ -3,15 +3,15 @@
 #include "Object.h"
 
 class Object;
-class Manager
+class ObjectManager
 {
 private:
-	static Manager* Instance;
+	static ObjectManager* Instance;
 
 public:
-	static Manager* GetInstance() {
+	static ObjectManager* GetInstance() {
 		if (Instance == NULL)
-			Instance = new Manager();
+			Instance = new ObjectManager();
 		return Instance;
 	}
 
@@ -31,20 +31,23 @@ public:
 
 public:
 
-	//길이
+	//이진법 표기 길이
 	void SetLen(int _len) { Len = _len; }
 	int GetLen() { return Len; }
 
-	//뽑을 횟수
+	//한번 뽑을 횟수
 	void SetCnt(int _cnt) { Cnt = _cnt; }
 	int GetCnt() { return Cnt; }
 
-	//랜덤숫자 가져오기
-	int GetRandom();					//이미 설정한 값으로 숫자
-	int GetRandom(int _min, int _max);	//min~max 중
+	//최솟값
+	void SetMin(int _min) { Min = _min; }
+	int GetMin() { return Min; }
 
+	//최댓값
+	void SetMax(int _max) { Max = _max; }
+	int GetMax() { return Max; }
 
-	//오브젝트 리스트
+	//오브젝트 리스트에 넣기
 	void SetObjectList(Object* _Obj);
 	void SetObjectList(int _cand);
 	void SetObjectList(vector<int> _binary);
@@ -52,7 +55,6 @@ public:
 	void SetNextObjectList(Object* _Obj);
 	void SetNextObjectList(int _cand);
 	void SetNextObjectList(vector<int> _binary);	
-
 
 	//오브젝트 가져오기
 	Object* GetObject(int ind) { return ObjectList[ind]; }
@@ -63,8 +65,8 @@ public:
 
 
 private:
-	Manager() {};
+	ObjectManager() {};
 public:
-	~Manager() {};
+	~ObjectManager() {};
 };
 

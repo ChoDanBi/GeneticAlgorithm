@@ -13,19 +13,25 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\Manager">
-      <UniqueIdentifier>{27e2684d-5027-46f2-b9a0-a988b2e1dc76}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Object">
       <UniqueIdentifier>{47be38e8-6fd7-460e-aea5-483a86e34347}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\CrossManager">
+      <UniqueIdentifier>{aeaa295a-811a-469f-affa-07223d2cb705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ObjectManager">
+      <UniqueIdentifier>{27e2684d-5027-46f2-b9a0-a988b2e1dc76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ObjectManager\Factory">
+      <UniqueIdentifier>{5eb16d3a-a473-4f30-b13f-07064fd38133}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Manager.cpp">
-      <Filter>소스 파일\Manager</Filter>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>소스 파일\ObjectManager</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>소스 파일\Object</Filter>
@@ -35,11 +41,17 @@
     <ClInclude Include="header.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Manager.h">
-      <Filter>소스 파일\Manager</Filter>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>소스 파일\ObjectManager</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>소스 파일\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossManager.h">
+      <Filter>소스 파일\CrossManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>소스 파일\ObjectManager\Factory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
