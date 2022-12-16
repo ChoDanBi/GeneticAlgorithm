@@ -16,8 +16,9 @@ public:
 	}
 
 private:
+	int Size;		//만들 오브젝트의 개수
+	int Cnt;		//선택할 때의 개수
 	int Len;		//이진수의 길이
-	int Cnt;		//뽑기 개수
 	int Min;		//작은 숫자 범s위
 	int Max;		//큰 숫자 범위
 
@@ -27,9 +28,12 @@ private:
 public:
 	//초기화
 	void Init();
-	void Init(int _len, int _cnt, int _min, int _max);
+	void Init(int _size, int _cnt, int _len, int _min, int _max);
 
 public:
+	//오브젝트 리스트 크기
+	void SetSize(int _size) { Size = _size; }
+	int GetSize() { return Size; }
 
 	//이진법 표기 길이
 	void SetLen(int _len) { Len = _len; }
@@ -54,15 +58,21 @@ public:
 
 	void SetNextObjectList(Object* _Obj);
 	void SetNextObjectList(int _cand);
-	void SetNextObjectList(vector<int> _binary);	
+	void SetNextObjectList(vector<int> _binary);
 
 	//오브젝트 가져오기
 	Object* GetObject(int ind) { return ObjectList[ind]; }
 	vector<Object*>* GetObjectList() { return &ObjectList; };
 
 	Object* GetNextObject(int ind) { return NextObjectList[ind]; }
-	vector<Object*>* GetNextObjectList() { return &NextObjectList; };	
+	vector<Object*>* GetNextObjectList() { return &NextObjectList; };
 
+	//리스트 보여주기
+	void ShowObjList();
+	void ShowNextObjList();
+
+	void ObjListRelease();
+	void NextObjListRelease();
 
 private:
 	ObjectManager() {};
