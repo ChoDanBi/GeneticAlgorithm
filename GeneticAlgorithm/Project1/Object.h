@@ -16,8 +16,14 @@ private:
 
 public:
 	//세팅 - 후보해로 만들어도 되고 이진수로 만들어도 됨
-	void SetInit(int _Cand);	//숫자로 초기화
-	void SetInit(vector<int> _Binary);	//이진수로 초기화
+	//숫자로 초기화
+	void SetInit(int _Cand);
+	void SetInit(int _Cand, int _len);
+	//이진수로 초기화
+	void SetInit(vector<int> _Binary);
+	void SetInit(vector<int> _Binary, int _len);
+
+	void SetLen(int _len) { Len = _len; }
 
 	//가져오기
 	int GetCand() { return Cand; };

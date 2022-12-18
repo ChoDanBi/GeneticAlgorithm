@@ -28,6 +28,7 @@ private:
 public:
 	//초기화
 	void Init();
+	void Init(int _size, int _cnt, int _len);
 	void Init(int _size, int _cnt, int _len, int _min, int _max);
 
 public:
@@ -67,10 +68,15 @@ public:
 	Object* GetNextObject(int ind) { return NextObjectList[ind]; }
 	vector<Object*>* GetNextObjectList() { return &NextObjectList; };
 
+	//오브젝트 찾기
+	bool FindObjCand(int _cand);
+	Object* FindObjMaxRes();
+
 	//리스트 보여주기
 	void ShowObjList();
 	void ShowNextObjList();
 
+	//리스트 해제
 	void ObjListRelease();
 	void NextObjListRelease();
 

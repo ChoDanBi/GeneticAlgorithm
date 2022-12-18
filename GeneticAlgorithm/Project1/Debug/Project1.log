@@ -1,12 +1,5 @@
-﻿  ObjectManager.cpp
-C:\Users\coldo\source\repos\ChoDanBi\GeneticAlgorithm\GeneticAlgorithm\Project1\ObjectManager.cpp(44,98): error C3867: 'ObjectManager::cmp': 비표준 구문입니다. '&'를 사용하여 멤버 포인터를 만드세요.
-C:\Users\coldo\source\repos\ChoDanBi\GeneticAlgorithm\GeneticAlgorithm\Project1\ObjectManager.cpp(44,37): error C2672: 'sort': 일치하는 오버로드된 함수가 없습니다.
-C:\Users\coldo\source\repos\ChoDanBi\GeneticAlgorithm\GeneticAlgorithm\Project1\ObjectManager.cpp(44,98): error C2780: 'void std::sort(const _RanIt,const _RanIt)': 인수가 2개 있어야 하는데 3개를 사용했습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\algorithm(7403): message : 'std::sort' 선언을 참조하십시오.
-C:\Users\coldo\source\repos\ChoDanBi\GeneticAlgorithm\GeneticAlgorithm\Project1\ObjectManager.cpp(45,110): error C3867: 'ObjectManager::cmp': 비표준 구문입니다. '&'를 사용하여 멤버 포인터를 만드세요.
-C:\Users\coldo\source\repos\ChoDanBi\GeneticAlgorithm\GeneticAlgorithm\Project1\ObjectManager.cpp(45,41): error C2672: 'sort': 일치하는 오버로드된 함수가 없습니다.
-C:\Users\coldo\source\repos\ChoDanBi\GeneticAlgorithm\GeneticAlgorithm\Project1\ObjectManager.cpp(45,110): error C2780: 'void std::sort(const _RanIt,const _RanIt)': 인수가 2개 있어야 하는데 3개를 사용했습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\algorithm(7403): message : 'std::sort' 선언을 참조하십시오.
+﻿  main.cpp
   Object.cpp
 C:\Users\coldo\source\repos\ChoDanBi\GeneticAlgorithm\GeneticAlgorithm\Project1\Object.cpp(40,39): warning C4244: '+=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다...
+  Project1.vcxproj -> C:\Users\coldo\source\repos\ChoDanBi\GeneticAlgorithm\GeneticAlgorithm\Debug\Project1.exe

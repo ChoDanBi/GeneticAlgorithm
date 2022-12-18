@@ -18,6 +18,13 @@ void ObjectManager::Init()
 	}
 }
 
+void ObjectManager::Init(int _size, int _cnt, int _len)
+{
+	Size = _size;
+	Cnt = _cnt;
+	Len = _len;
+}
+
 void ObjectManager::Init(int _size, int _cnt, int _len, int _min, int _max)
 {
 	Size = _size;
@@ -40,6 +47,28 @@ void ObjectManager::SetObjectList(vector<int> _binary) { ObjectList.push_back(Fa
 void ObjectManager::SetNextObjectList(Object* _Obj) { NextObjectList.push_back(_Obj); }
 void ObjectManager::SetNextObjectList(int _cand) { NextObjectList.push_back(Factory::CreateObj(_cand)); }
 void ObjectManager::SetNextObjectList(vector<int> _binary){ NextObjectList.push_back(Factory::CreateObj(_binary));}
+
+
+bool ObjectManager::FindObjCand(int _cand)
+{
+	for (vector<Object*>::iterator it = ObjectList.begin();
+		it != ObjectList.end(); ++it) {
+		if ((*it)->GetCand() == _cand) 
+			return true;
+	}
+	return false;
+}
+
+Object* ObjectManager::FindObjMaxRes()
+{
+	if (ObjectList.empty())return nullptr;
+	Object* obj = ObjectList[0];
+	for (vector<Object*>::iterator it = ObjectList.begin();
+		it != ObjectList.end(); ++it) {
+		if (obj->GetRes() < (*it)->GetRes()) obj = (*it);
+	}
+	return obj;
+}
 
 void ObjectManager::ShowObjList(){
 	for (vector<Object*>::iterator it = ObjectList.begin();
