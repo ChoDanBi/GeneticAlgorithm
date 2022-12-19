@@ -16,9 +16,6 @@
     <Filter Include="소스 파일\Object">
       <UniqueIdentifier>{47be38e8-6fd7-460e-aea5-483a86e34347}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\CrossManager">
-      <UniqueIdentifier>{aeaa295a-811a-469f-affa-07223d2cb705}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\ObjectManager">
       <UniqueIdentifier>{27e2684d-5027-46f2-b9a0-a988b2e1dc76}</UniqueIdentifier>
     </Filter>
@@ -36,6 +33,9 @@
     <ClCompile Include="Object.cpp">
       <Filter>소스 파일\Object</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectFactory.cpp">
+      <Filter>소스 파일\ObjectManager\Factory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header.h">
@@ -47,10 +47,7 @@
     <ClInclude Include="Object.h">
       <Filter>소스 파일\Object</Filter>
     </ClInclude>
-    <ClInclude Include="CrossManager.h">
-      <Filter>소스 파일\CrossManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Factory.h">
+    <ClInclude Include="ObjectFactory.h">
       <Filter>소스 파일\ObjectManager\Factory</Filter>
     </ClInclude>
   </ItemGroup>

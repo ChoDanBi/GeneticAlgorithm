@@ -5,8 +5,8 @@ class Object
 {
 private:
 	int Cand = 0;	//후보해: x
-	int Res;		//적랍도: f(x)
-	int Len;		//이진법 표기 개수
+	int Res = 0;		//적랍도: f(x)
+	int Len = 5;		//이진법 표기 개수
 
 	vector<int> Binary;	//이진법 그러나 거꾸로 저장됨을 확인
 	/*ex)
@@ -36,5 +36,6 @@ public:
 		for (int i = Len - 1; i >= 0; --i)
 			cout << Binary[i]; cout << endl;
 	};
+
 };
 
