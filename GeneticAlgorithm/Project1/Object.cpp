@@ -7,7 +7,7 @@ void Object::SetInit(int _Cand)
 	this->Cand = _Cand;
 	
 	//적합도
-	this->Res = 80 + (38 * _Cand) - (_Cand * _Cand);
+	this->Res = f(Cand);
 
 	//이진법 표기 길이
 	Len = ObjectManager::GetInstance()->GetLen();
@@ -28,7 +28,7 @@ void Object::SetInit(int _Cand, int _len)
 	this->Cand = _Cand;
 
 	//적합도
-	this->Res = 80 + (38 * _Cand) - (_Cand * _Cand);
+	this->Res = f(Cand);
 
 	//이진법 표기 길이
 	SetLen(_len);
@@ -52,7 +52,7 @@ void Object::SetInit(vector<int> _Binary)
 		Cand += _Binary[i] * (int)pow(2, i);
 
 	//적합도
-	this->Res = 80 + (38 * this->Cand) - (int)pow(this->Cand, 2);
+	this->Res = f(Cand);
 
 	//이진법 표기 길이
 	Len = ObjectManager::GetInstance()->GetLen();
@@ -85,7 +85,7 @@ void Object::SetInit(vector<int> _Binary, int _len)
 	}
 
 	//적합도
-	this->Res = 80 + (38 * this->Cand) - (int)pow(this->Cand, 2);
+	this->Res = f(Cand);
 
 	//이진법 표기 길이
 	SetLen(_len);

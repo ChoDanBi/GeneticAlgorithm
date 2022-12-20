@@ -1,7 +1,6 @@
 #pragma once
 #include "header.h"
 #include "Object.h"
-#include "ObjectFactory.h"
 
 class Object;
 class ObjectManager
@@ -25,9 +24,7 @@ private:
 	int Max = 0;		//큰 숫자 범위
 
 	//현재 인구 리스트
-	vector<Object*> ObjList;	
-	//만들어진 세대 오브젝트 관리 리스트
-	vector<Object*> NextObjList;
+	vector<Object*> ObjList;
 
 public:
 	//초기화
@@ -66,37 +63,36 @@ public:
 	void SetObjList(int _cand);
 	void SetObjList(vector<int> _binary);
 
-	void SetNextObjList(Object* _Obj);
-	void SetNextObjList(int _cand);
-	void SetNextObjList(vector<int> _binary);
-
-	//다음세대 Cross된 오브젝트 넣기
+	//현재 인구로 Cross된 오브젝트 넣기
 	void SetCrsObjList();
 	void SetCrsObjList(Object * _Obj1, Object* _Obj2);
 
-	//다음세대 돌연변이 오브젝트 넣기
+	//현재 인구로 돌연변이 오브젝트 만들어 넣기
 	void SetMutObjList();
 	void SetMutObjList(int _cnt);
 	void SetMutObjList(Object * _Obj);
 
+	//오브젝트 정렬
+	void SortObjList();
+
+	//다음세대 선택하기
+	void SetSelObjList();
+	void SetSelObjList(int _cnt);
+	
 	//오브젝트 가져오기
 	Object* GetObject(int ind) { return ObjList[ind]; }
 	vector<Object*>* GetObjList() { return &ObjList; };
 
-	Object* GetNextObject(int ind) { return NextObjList[ind]; }
-	vector<Object*>* GetNextObjList() { return &NextObjList; };
 
-	//오브젝트 찾기
+	//특정 오브젝트 찾기
 	bool FindObjCand(int _cand);
 	Object* FindObjMaxRes();
 
 	//리스트 보여주기
 	void ShowObjList();
-	void ShowNextObjList();
 
 	//리스트 해제
 	void ObjListRelease();
-	void NextObjListRelease();
 
 private:
 	ObjectManager() {};

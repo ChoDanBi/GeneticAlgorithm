@@ -37,5 +37,10 @@ public:
 			cout << Binary[i]; cout << endl;
 	};
 
+	static bool cmp(const Object* o1, const Object* o2) {
+		return o1->Res > o2->Res; }
+
+private:
+	int f(int x) { return (80 + (38 * x) - (x * x)); }
 };
 

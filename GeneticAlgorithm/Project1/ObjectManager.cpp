@@ -44,9 +44,6 @@ void ObjectManager::SetObjList(Object* _Obj) { ObjList.push_back(_Obj); }
 void ObjectManager::SetObjList(int _cand) { ObjList.push_back(ObjectFactory::CreateObj(_cand)); }
 void ObjectManager::SetObjList(vector<int> _binary) { ObjList.push_back(ObjectFactory::CreateObj(_binary)); }
 
-void ObjectManager::SetNextObjList(Object* _Obj) { NextObjList.push_back(_Obj); }
-void ObjectManager::SetNextObjList(int _cand) { NextObjList.push_back(ObjectFactory::CreateObj(_cand)); }
-void ObjectManager::SetNextObjList(vector<int> _binary){ NextObjList.push_back(ObjectFactory::CreateObj(_binary));}
 
 void ObjectManager::SetCrsObjList()
 {	
@@ -67,7 +64,6 @@ void ObjectManager::SetCrsObjList()
 		SetCrsObjList(ObjList[ind1], ObjList[ind2]);
 	}	
 }
-
 void ObjectManager::SetCrsObjList(Object* _Obj1, Object* _Obj2)
 {
 	SetObjList(
@@ -76,14 +72,13 @@ void ObjectManager::SetCrsObjList(Object* _Obj1, Object* _Obj2)
 		ObjectFactory::CreateCrossObj(_Obj2, _Obj1));
 }
 
+
 void ObjectManager::SetMutObjList(){
 	for (int i = 0; i < mCnt; ++i) {
 		int ind = ObjectFactory::GetRandom(0, Size - 1);
-
 		SetObjList(ObjectFactory::CreateMutationObj(ObjList[ind]));
 	}
 }
-
 void ObjectManager::SetMutObjList(int _cnt)
 {
 	for (int i = 0; i < _cnt; ++i) {
@@ -92,12 +87,37 @@ void ObjectManager::SetMutObjList(int _cnt)
 		SetObjList(ObjectFactory::CreateMutationObj(ObjList[ind]));
 	}
 }
-
 void ObjectManager::SetMutObjList(Object* _Obj)
 {
 	SetObjList(ObjectFactory::CreateMutationObj(_Obj));
 }
 
+
+void ObjectManager::SortObjList() { 
+	sort(ObjList.begin(), ObjList.end(), Object::cmp); 
+}
+
+void ObjectManager::SetSelObjList()
+{
+	vector<Object*>::iterator iter = (ObjList.begin() + (ObjList.size()-1));
+	for (int i = ObjList.size(); i > Cnt; --i){
+		delete(*iter);
+		(*iter) = nullptr;
+		--iter;
+		ObjList.pop_back();
+	}
+}
+
+void ObjectManager::SetSelObjList(int _cnt)
+{
+	vector<Object*>::iterator iter = (ObjList.begin() + (ObjList.size() - 1));
+	for (int i = ObjList.size(); i > _cnt; --i) {
+		delete(*iter);
+		(*iter) = nullptr;
+		--iter;
+		ObjList.pop_back();
+	}
+}
 
 bool ObjectManager::FindObjCand(int _cand)
 {
@@ -126,11 +146,6 @@ void ObjectManager::ShowObjList(){
 		it != ObjList.end(); ++it)
 		(*it)->show();
 }
-void ObjectManager::ShowNextObjList(){
-	for (vector<Object*>::iterator it = NextObjList.begin();
-		it != NextObjList.end(); ++it)
-		(*it)->show();
-}
 
 void ObjectManager::ObjListRelease()
 {
@@ -142,15 +157,4 @@ void ObjectManager::ObjListRelease()
 		}
 	}
 	ObjList.clear();
-}
-void ObjectManager::NextObjListRelease()
-{
-	for (vector<Object*>::iterator iter = NextObjList.begin();
-		iter != NextObjList.end(); ++iter) {
-		if (*iter) {
-			delete(*iter);
-			(*iter) = nullptr;
-		}
-	}
-	NextObjList.clear();
 }
