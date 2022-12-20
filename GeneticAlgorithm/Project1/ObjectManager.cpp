@@ -48,19 +48,25 @@ void ObjectManager::SetNextObjList(int _cand) { NextObjList.push_back(ObjectFact
 void ObjectManager::SetNextObjList(vector<int> _binary){ NextObjList.push_back(ObjectFactory::CreateObj(_binary));}
 
 void ObjectManager::SetCrsNextObjList()
-{
-	vector<Object*> v(ObjList.begin(), ObjList.end());
-	while (v.size() > 1) {
-		int ind1 = ObjectFactory::GetRandom(0, v.size() - 1);
-		int ind2;do {
+{	
+	vector<bool> v(ObjList.size(),false);
+	
+	for (int i = 0; i < v.size() / 2; ++i) {
+
+		int ind1; while (true) {
+			ind1 = ObjectFactory::GetRandom(0, v.size() - 1);
+			if (!v[ind1]) { v[ind1] = true; break; }
+		}
+
+		int ind2;
+		while (true) {
 			ind2 = ObjectFactory::GetRandom(0, v.size() - 1);
-		} while (ind1 == ind2);
+			if (!v[ind2]) { v[ind2] = true; break; }
+		}
 
-		SetCrsNextObjList(v[ind1], v[ind2]);
-
-		v.erase(v.begin() + ind1);
-		v.erase(v.begin() + ind2);
+		SetCrsNextObjList(ObjList[ind1], ObjList[ind2]);
 	}
+	
 }
 
 void ObjectManager::SetCrsNextObjList(Object* _Obj1, Object* _Obj2)
