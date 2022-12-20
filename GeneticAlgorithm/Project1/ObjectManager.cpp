@@ -26,13 +26,14 @@ void ObjectManager::Init(int _cnt,int _mcnt, int _len)
 }
 void ObjectManager::Init(int _size, int _cnt, int _mcnt, int _len, int _min, int _max)
 {
+	Size = _size;
 	Cnt = _cnt;
 	mCnt = _mcnt;
 	Len = _len;
 	Min = _min;
 	Max = _max;
 	
-	for (int i = 0; i < _size; ++i) {
+	for (int i = 0; i < Size; ++i) {
 		int cand = ObjectFactory::GetRandom();
 		SetObjList(cand);	
 	}
@@ -47,55 +48,54 @@ void ObjectManager::SetNextObjList(Object* _Obj) { NextObjList.push_back(_Obj); 
 void ObjectManager::SetNextObjList(int _cand) { NextObjList.push_back(ObjectFactory::CreateObj(_cand)); }
 void ObjectManager::SetNextObjList(vector<int> _binary){ NextObjList.push_back(ObjectFactory::CreateObj(_binary));}
 
-void ObjectManager::SetCrsNextObjList()
+void ObjectManager::SetCrsObjList()
 {	
-	vector<bool> v(ObjList.size(),false);
-	
-	for (int i = 0; i < v.size() / 2; ++i) {
+	vector<bool> v(Size, false);	
+	for (int i = 0; i < Size / 2; ++i) {
 
 		int ind1; while (true) {
-			ind1 = ObjectFactory::GetRandom(0, v.size() - 1);
+			ind1 = ObjectFactory::GetRandom(0, (Size - 1));
 			if (!v[ind1]) { v[ind1] = true; break; }
 		}
 
 		int ind2;
 		while (true) {
-			ind2 = ObjectFactory::GetRandom(0, v.size() - 1);
+			ind2 = ObjectFactory::GetRandom(0, (Size - 1));
 			if (!v[ind2]) { v[ind2] = true; break; }
 		}
 
-		SetCrsNextObjList(ObjList[ind1], ObjList[ind2]);
-	}
-	
+		SetCrsObjList(ObjList[ind1], ObjList[ind2]);
+	}	
 }
 
-void ObjectManager::SetCrsNextObjList(Object* _Obj1, Object* _Obj2)
+void ObjectManager::SetCrsObjList(Object* _Obj1, Object* _Obj2)
 {
-	SetNextObjList(
+	SetObjList(
 		ObjectFactory::CreateCrossObj(_Obj1, _Obj2));
-	SetNextObjList(
+	SetObjList(
 		ObjectFactory::CreateCrossObj(_Obj2, _Obj1));
 }
 
-void ObjectManager::SetMutNextObjList()
-{
-	SetMutNextObjList(mCnt);
-}
+void ObjectManager::SetMutObjList(){
+	for (int i = 0; i < mCnt; ++i) {
+		int ind = ObjectFactory::GetRandom(0, Size - 1);
 
-void ObjectManager::SetMutNextObjList(int _cnt)
-{
-	for (int i = 0; i < _cnt; ++i) {
-		int ind = ObjectFactory::GetRandom(0,
-			ObjList.size() - 1);
-		SetNextObjList(
-			ObjectFactory::CreateMutationObj(ObjList[ind])	);
+		SetObjList(ObjectFactory::CreateMutationObj(ObjList[ind]));
 	}
 }
 
-void ObjectManager::SetMutNextObjList(Object* _Obj)
+void ObjectManager::SetMutObjList(int _cnt)
 {
-	SetNextObjList(
-		ObjectFactory::CreateMutationObj(_Obj));
+	for (int i = 0; i < _cnt; ++i) {
+		int ind = ObjectFactory::GetRandom(0, Size - 1);
+
+		SetObjList(ObjectFactory::CreateMutationObj(ObjList[ind]));
+	}
+}
+
+void ObjectManager::SetMutObjList(Object* _Obj)
+{
+	SetObjList(ObjectFactory::CreateMutationObj(_Obj));
 }
 
 

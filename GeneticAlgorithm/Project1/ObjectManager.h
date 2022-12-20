@@ -17,6 +17,7 @@ public:
 	}
 
 private:
+	int Size = 0;		//인구수(오브젝트리스트의 초창기 크기)
 	int Cnt = 0;		//다음세대로 뽑을 때의 개수
 	int mCnt = 0;		//돌연변이 만들 개수
 	int Len = 5;		//이진수의 길이
@@ -36,13 +37,21 @@ public:
 		int _size, int _cnt, int _mcnt, int _len, int _min, int _max);
 
 public:
+	//원래의 인구수(오브젝트리스트의 초창기 크기)
+	void SetSize(int _size) { Size = _size; }
+	int GetSize() { return Size; }
+
+	//다음 세대를 뽑을 횟수
+	void SetCnt(int _cnt) { Cnt = _cnt; }
+	int GetCnt() { return Cnt; }
+
+	//돌연변이를 뽑을 횟수
+	void SetmCnt(int _mcnt) { mCnt = _mcnt; }
+	int GetmCnt() { return mCnt; }
+
 	//이진법 표기 길이
 	void SetLen(int _len) { Len = _len; }
 	int GetLen() { return Len; }
-
-	//한번 뽑을 횟수
-	void SetCnt(int _cnt) { Cnt = _cnt; }
-	int GetCnt() { return Cnt; }
 
 	//최솟값
 	void SetMin(int _min) { Min = _min; }
@@ -62,13 +71,13 @@ public:
 	void SetNextObjList(vector<int> _binary);
 
 	//다음세대 Cross된 오브젝트 넣기
-	void SetCrsNextObjList();
-	void SetCrsNextObjList(Object * _Obj1, Object* _Obj2);
+	void SetCrsObjList();
+	void SetCrsObjList(Object * _Obj1, Object* _Obj2);
 
 	//다음세대 돌연변이 오브젝트 넣기
-	void SetMutNextObjList();
-	void SetMutNextObjList(int _cnt);
-	void SetMutNextObjList(Object * _Obj);
+	void SetMutObjList();
+	void SetMutObjList(int _cnt);
+	void SetMutObjList(Object * _Obj);
 
 	//오브젝트 가져오기
 	Object* GetObject(int ind) { return ObjList[ind]; }

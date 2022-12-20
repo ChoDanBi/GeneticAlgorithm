@@ -12,9 +12,9 @@ int main() {
 	ObjectManager::GetInstance()->ShowObjList();
 	cout << "\n\n***NextObjList*****\n ";
 	//ObjectManager::GetInstance()->SetMutNextObjList();
-	ObjectManager::GetInstance()->SetCrsNextObjList();
-
-	ObjectManager::GetInstance()->ShowNextObjList();
+	ObjectManager::GetInstance()->SetCrsObjList();
+	ObjectManager::GetInstance()->SetMutObjList();
+	ObjectManager::GetInstance()->ShowObjList();
 	
 
 	
