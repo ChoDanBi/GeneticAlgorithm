@@ -83,6 +83,9 @@ public:
 	Object* GetObject(int ind) { return ObjList[ind]; }
 	vector<Object*>* GetObjList() { return &ObjList; };
 
+	//다음세대 가져오기
+	void GetNextObjList();
+	void GetNextObjList(int _cnt);
 
 	//특정 오브젝트 찾기
 	bool FindObjCand(int _cand);

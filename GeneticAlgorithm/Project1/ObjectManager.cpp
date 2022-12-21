@@ -17,6 +17,9 @@ void ObjectManager::Init()
 		int cand = ObjectFactory::GetRandom();
 		SetObjList(cand);
 	}
+
+	cout << "초기세대" << endl;
+	ShowObjList();
 }
 void ObjectManager::Init(int _cnt,int _mcnt, int _len)
 {
@@ -37,6 +40,9 @@ void ObjectManager::Init(int _size, int _cnt, int _mcnt, int _len, int _min, int
 		int cand = ObjectFactory::GetRandom();
 		SetObjList(cand);	
 	}
+
+	cout << "[     초기세대     ]" << endl;
+	ShowObjList();
 }
 
 
@@ -106,6 +112,7 @@ void ObjectManager::SetSelObjList()
 		--iter;
 		ObjList.pop_back();
 	}
+	Size = Cnt;
 }
 
 void ObjectManager::SetSelObjList(int _cnt)
@@ -116,6 +123,33 @@ void ObjectManager::SetSelObjList(int _cnt)
 		(*iter) = nullptr;
 		--iter;
 		ObjList.pop_back();
+	}
+	Size = Cnt;
+}
+
+void ObjectManager::GetNextObjList()
+{
+	SetCrsObjList();
+	SetMutObjList();
+	SortObjList();
+	SetSelObjList();
+
+	ShowObjList();
+}
+
+void ObjectManager::GetNextObjList(int _cnt)
+{
+	for (int i = 0; i < _cnt; ++i) {
+		SetCrsObjList();
+		SetMutObjList();
+		SortObjList();
+
+		cout << "\n\n\n[     " << i << "세대 자식     ]\n";
+		ShowObjList();
+
+		SetSelObjList();
+		cout << "\n********* " << (i + 1) << "번째 세대 *********\n";
+		ShowObjList();
 	}
 }
 

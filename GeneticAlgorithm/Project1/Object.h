@@ -8,17 +8,16 @@ private:
 	int Res = 0;		//적랍도: f(x)
 	int Len = 5;		//이진법 표기 개수
 
-	vector<int> Binary;	//이진법 그러나 거꾸로 저장됨을 확인
+	vector<int> Binary;	//이진법, 그러나 거꾸로 저장됨을 확인
 	/*ex)
 	7: 00111
-	실제 저장: 11100
-	*/
+	실제 저장: 11100*/
 
 public:
-	//세팅 - 후보해로 만들어도 되고 이진수로 만들어도 됨
 	//숫자로 초기화
 	void SetInit(int _Cand);
 	void SetInit(int _Cand, int _len);
+
 	//이진수로 초기화
 	void SetInit(vector<int> _Binary);
 	void SetInit(vector<int> _Binary, int _len);
@@ -41,6 +40,8 @@ public:
 		return o1->Res > o2->Res; }
 
 private:
+	//함수
 	int f(int x) { return (80 + (38 * x) - (x * x)); }
+	//int f(int x) { return (80 + (38 * x) - (x * x)); }
 };
 

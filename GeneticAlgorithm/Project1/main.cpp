@@ -2,27 +2,16 @@
 #include "ObjectManager.h"
 
 int main() {
+		
+	//초기 인구수, 다음세대 인구수, 돌연변이 발생 수, 
+	//이진법 표기길이, 최소값, 최대값
 	
+	ObjectManager::GetInstance()->Init(4, 4, 2, 4, 0, 15);
+	//ObjectManager::GetInstance()->Init(4, 4, 2, 5, 0, 31);
+	//ObjectManager::GetInstance()->Init(10, 10, 5, 6, 0, 63);
+	//ObjectManager::GetInstance()->Init(10, 10, 5, 7, 0, 127);
+
+	ObjectManager::GetInstance()->GetNextObjList(50);
 	
-
-	
-	ObjectManager::GetInstance()->Init(4, 4, 2, 5, 0, 31);
-
-	cout << "\n*****현재 오브젝트 리스트 안에 들어있는 오브젝트*****\n";
-	ObjectManager::GetInstance()->ShowObjList();
-
-	cout << "\n\n*****ObjList*****\n ";
-	ObjectManager::GetInstance()->SetCrsObjList();
-	ObjectManager::GetInstance()->SetMutObjList();
-	ObjectManager::GetInstance()->ShowObjList();
-
-	cout << "\n\n*****SortObjList*****\n ";
-	ObjectManager::GetInstance()->SortObjList();
-	ObjectManager::GetInstance()->ShowObjList();
-	
-	cout << "\n\n*****NextObjList*****\n ";
-	ObjectManager::GetInstance()->SetSelObjList();
-	ObjectManager::GetInstance()->ShowObjList();
-
 	return 0;
 }
