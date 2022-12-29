@@ -3,46 +3,28 @@
 
 ObjectManager* ObjectManager::Instance = NULL;
 
-void ObjectManager::Init()
+void ObjectManager::Init(int _ncnt,int _mcnt, int _len)
 {
-	int Size;
-	cout << "초기 오브젝트 만들 개수: "; cin >> Size;
-	cout << "선택할 때 뽑을 개수 입력: "; cin >> Cnt;
-	cout << "돌연변이 만들 개수 입력: "; cin >> mCnt;
-	cout << "이진수 길이 표시 입력: "; cin >> Len;
-	cout << "최소 범위 입력: "; cin >> Min;
-	cout << "최대 범위 입력: "; cin >> Max;
-
-	for (int i = 0; i < Size; ++i) {
-		int cand = ObjectFactory::GetRandom();
-		SetObjList(cand);
-	}
-
-	cout << "초기세대" << endl;
-	ShowObjList();
-}
-void ObjectManager::Init(int _cnt,int _mcnt, int _len)
-{
-	Cnt = _cnt;
+	nCnt = _ncnt;
 	mCnt = _mcnt;
 	Len = _len;
 }
-void ObjectManager::Init(int _size, int _cnt, int _mcnt, int _len, int _min, int _max)
+void ObjectManager::Init(int _psize, int _ncnt, int _mcnt, int _len, int _min, int _max)
 {
-	Size = _size;
-	Cnt = _cnt;
+	pSize = _psize;
+	nCnt = _ncnt;
 	mCnt = _mcnt;
 	Len = _len;
 	Min = _min;
 	Max = _max;
 	
-	for (int i = 0; i < Size; ++i) {
+	for (int i = 0; i < pSize; ++i) {
 		int cand = ObjectFactory::GetRandom();
 		SetObjList(cand);	
 	}
 
 	cout << "[     초기세대     ]" << endl;
-	ShowObjList();
+	ShowObjList(); cout << endl;
 }
 
 
@@ -53,23 +35,24 @@ void ObjectManager::SetObjList(vector<int> _binary) { ObjList.push_back(ObjectFa
 
 void ObjectManager::SetCrsObjList()
 {	
-	vector<bool> v(Size, false);	
-	for (int i = 0; i < Size / 2; ++i) {
+	vector<bool> v(pSize, false);	
+	for (int i = 0; i < pSize / 2; ++i) {
 
 		int ind1; while (true) {
-			ind1 = ObjectFactory::GetRandom(0, (Size - 1));
+			ind1 = ObjectFactory::GetRandom(0, (pSize - 1));
 			if (!v[ind1]) { v[ind1] = true; break; }
 		}
 
 		int ind2;
 		while (true) {
-			ind2 = ObjectFactory::GetRandom(0, (Size - 1));
+			ind2 = ObjectFactory::GetRandom(0, (pSize - 1));
 			if (!v[ind2]) { v[ind2] = true; break; }
 		}
 
 		SetCrsObjList(ObjList[ind1], ObjList[ind2]);
 	}	
 }
+
 void ObjectManager::SetCrsObjList(Object* _Obj1, Object* _Obj2)
 {
 	SetObjList(
@@ -81,18 +64,19 @@ void ObjectManager::SetCrsObjList(Object* _Obj1, Object* _Obj2)
 
 void ObjectManager::SetMutObjList(){
 	for (int i = 0; i < mCnt; ++i) {
-		int ind = ObjectFactory::GetRandom(0, Size - 1);
+		int ind = ObjectFactory::GetRandom(0, pSize - 1);
 		SetObjList(ObjectFactory::CreateMutationObj(ObjList[ind]));
 	}
 }
 void ObjectManager::SetMutObjList(int _cnt)
 {
 	for (int i = 0; i < _cnt; ++i) {
-		int ind = ObjectFactory::GetRandom(0, Size - 1);
+		int ind = ObjectFactory::GetRandom(0, pSize - 1);
 
 		SetObjList(ObjectFactory::CreateMutationObj(ObjList[ind]));
 	}
 }
+
 void ObjectManager::SetMutObjList(Object* _Obj)
 {
 	SetObjList(ObjectFactory::CreateMutationObj(_Obj));
@@ -106,13 +90,12 @@ void ObjectManager::SortObjList() {
 void ObjectManager::SetSelObjList()
 {
 	vector<Object*>::iterator iter = (ObjList.begin() + (ObjList.size()-1));
-	for (int i = ObjList.size(); i > Cnt; --i){
+	for (int i = ObjList.size(); i > nCnt; --i){
 		delete(*iter);
-		(*iter) = nullptr;
-		--iter;
+		(*iter) = nullptr; --iter;
 		ObjList.pop_back();
 	}
-	Size = Cnt;
+	pSize = nCnt;
 }
 
 void ObjectManager::SetSelObjList(int _cnt)
@@ -124,55 +107,38 @@ void ObjectManager::SetSelObjList(int _cnt)
 		--iter;
 		ObjList.pop_back();
 	}
-	Size = Cnt;
+	pSize = nCnt;
 }
 
-void ObjectManager::GetNextObjList()
+int ObjectManager::CreateNextGen()
 {
 	SetCrsObjList();
 	SetMutObjList();
 	SortObjList();
 	SetSelObjList();
-
-	ShowObjList();
+	return Counting(ObjList.front());
 }
 
-void ObjectManager::GetNextObjList(int _cnt)
+void ObjectManager::CreateNextGen(int _goal)
 {
-	for (int i = 0; i < _cnt; ++i) {
-		SetCrsObjList();
-		SetMutObjList();
-		SortObjList();
-
-		cout << "\n\n\n[     " << i << "세대 자식     ]\n";
-		ShowObjList();
-
-		SetSelObjList();
-		cout << "\n********* " << (i + 1) << "번째 세대 *********\n";
-		ShowObjList();
+	while (true)
+	{
+		int cnt = CreateNextGen();
+		cout << ", 카운팅: " << cnt << endl;
+		if (cnt >= _goal) break;
 	}
+
+	cout << "\n최종: "; ObjList.front()->show(); cout << endl;
 }
 
-bool ObjectManager::FindObjCand(int _cand)
+int ObjectManager::Counting(Object* obj)
 {
-	for (vector<Object*>::iterator it = ObjList.begin();
-		it != ObjList.end(); ++it) {
-		if ((*it)->GetCand() == _cand) 
-			return true;
-	}
-	return false;
-}
+	int _cand = obj->GetCand();
+	cout << "후보자: " << _cand;
 
-Object* ObjectManager::FindObjMaxRes()
-{
-	if (ObjList.empty())return nullptr;
-
-	Object* obj = ObjList[0];
-	for (vector<Object*>::iterator it = ObjList.begin();
-		it != ObjList.end(); ++it) {
-		if (obj->GetRes() < (*it)->GetRes()) obj = (*it);
-	}
-	return obj;
+	if (cntObjList.find(_cand) == cntObjList.end())
+		cntObjList.insert(make_pair(_cand, 0));
+	return ++cntObjList[_cand];
 }
 
 void ObjectManager::ShowObjList(){

@@ -16,8 +16,8 @@ public:
 	}
 
 private:
-	int Size = 0;		//인구수(오브젝트리스트의 초창기 크기)
-	int Cnt = 0;		//다음세대로 뽑을 때의 개수
+	int pSize = 0;		//인구수(오브젝트리스트의 초창기 크기)
+	int nCnt = 0;		//다음세대로 뽑을 때의 개수
 	int mCnt = 0;		//돌연변이 만들 개수
 	int Len = 5;		//이진수의 길이
 	int Min = 0;		//작은 숫자 범s위
@@ -25,22 +25,22 @@ private:
 
 	//현재 인구 리스트
 	vector<Object*> ObjList;
+	map<int, int> cntObjList;
 
 public:
 	//초기화
-	void Init();
-	void Init(int _cnt, int _mcnt, int _len);
+	void Init(int _ncnt, int _mcnt, int _len);
 	void Init(
-		int _size, int _cnt, int _mcnt, int _len, int _min, int _max);
+		int _psize, int _ncnt, int _mcnt, int _len, int _min, int _max);
 
 public:
 	//원래의 인구수(오브젝트리스트의 초창기 크기)
-	void SetSize(int _size) { Size = _size; }
-	int GetSize() { return Size; }
+	void SetSize(int _psize) { pSize = _psize; }
+	int GetSize() { return pSize; }
 
 	//다음 세대를 뽑을 횟수
-	void SetCnt(int _cnt) { Cnt = _cnt; }
-	int GetCnt() { return Cnt; }
+	void SetCnt(int _cnt) { nCnt = _cnt; }
+	int GetCnt() { return nCnt; }
 
 	//돌연변이를 뽑을 횟수
 	void SetmCnt(int _mcnt) { mCnt = _mcnt; }
@@ -83,17 +83,14 @@ public:
 	Object* GetObject(int ind) { return ObjList[ind]; }
 	vector<Object*>* GetObjList() { return &ObjList; };
 
-	//다음세대 가져오기
-	void GetNextObjList();
-	void GetNextObjList(int _cnt);
+	//다음세대 만들기
+	int CreateNextGen();
+	void CreateNextGen(int _goal);
 
-	//특정 오브젝트 찾기
-	bool FindObjCand(int _cand);
-	Object* FindObjMaxRes();
+	int Counting(Object* obj);
 
 	//리스트 보여주기
 	void ShowObjList();
-
 	//리스트 해제
 	void ObjListRelease();
 
